@@ -1,0 +1,7 @@
+.NavBar {
+    background-image: linear-gradient(rgba(87,65,87,0.75));
+}
+
+.navbar-brand {
+    color: white !important;
+}
