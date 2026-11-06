@@ -1,0 +1,211 @@
+/* ---------- About page: standing on the moon ---------- */
+.about-page {
+    --line: rgba(143, 123, 255, 0.4);
+    --accent: #c46bff;
+    --cyan: #9ad0ff;
+    position: relative;
+    box-sizing: border-box;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 130px 6vw 140px;
+    color: white;
+    font-family: "Orbitron";
+}
+
+/* the 3D lunar surface sits fixed behind everything */
+.about-bg { position: fixed; inset: 0; z-index: 0; }
+.about-bg canvas { display: block; }
+
+/* arrival flash: the light from the dive fades away */
+.emerge {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, #7a74c4 0%, #5a559f 55%, #2b2760 100%);
+    animation: emerge 1s ease-out forwards;
+}
+@keyframes emerge {
+    0%   { opacity: 1; }
+    25%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.about-content { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 110px; }
+
+/* sections rise up out of the surface in perspective */
+.reveal {
+    opacity: 0;
+    transform: perspective(1100px) translateY(80px) rotateX(22deg);
+    transform-origin: 50% 100%;
+    transition: opacity 0.9s ease, transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.in { opacity: 1; transform: perspective(1100px) none; }
+
+/* ---------- 3D tilt panels ---------- */
+.tilt {
+    position: relative;
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transform-style: preserve-3d;
+    transition: transform 0.25s ease-out;
+    will-change: transform;
+}
+/* glass backing + frame (kept on a pseudo-element so the panel's own 3D isn't flattened) */
+.tilt::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(14, 9, 26, 0.62);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(143, 123, 255, 0.3);
+    box-shadow: 0 40px 60px -24px rgba(0, 0, 0, 0.75), 0 0 34px rgba(143, 123, 255, 0.22);
+}
+.tilt::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    transform: translateZ(2px);
+    --c: #c46bff;
+    background:
+        linear-gradient(var(--c), var(--c)) top left / 16px 2px no-repeat,
+        linear-gradient(var(--c), var(--c)) top left / 2px 16px no-repeat,
+        linear-gradient(var(--c), var(--c)) top right / 16px 2px no-repeat,
+        linear-gradient(var(--c), var(--c)) top right / 2px 16px no-repeat,
+        linear-gradient(var(--c), var(--c)) bottom left / 16px 2px no-repeat,
+        linear-gradient(var(--c), var(--c)) bottom left / 2px 16px no-repeat,
+        linear-gradient(var(--c), var(--c)) bottom right / 16px 2px no-repeat,
+        linear-gradient(var(--c), var(--c)) bottom right / 2px 16px no-repeat;
+    opacity: 0.7;
+}
+/* layers that pop out of the panel */
+.z1 { transform: translateZ(26px); }
+.z2 { transform: translateZ(52px); }
+
+/* intro */
+.about-intro { display: grid; grid-template-columns: 300px 1fr; gap: 44px; align-items: center; }
+.about-photo-wrap { width: 300px; height: 300px; display: grid; place-items: center; }
+.about-photo-wrap::before, .about-photo-wrap::after { display: none; }
+.about-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 64px;
+    letter-spacing: 4px;
+    background: radial-gradient(circle at 35% 30%, rgba(200, 190, 255, 0.5), rgba(30, 20, 80, 0.9) 70%);
+    border: 1px solid var(--line);
+    box-shadow: 0 0 44px rgba(143, 123, 255, 0.55), inset -20px -20px 50px rgba(10, 5, 40, 0.8), 0 50px 40px -30px rgba(0, 0, 0, 0.8);
+    animation: floaty 5s ease-in-out infinite;
+}
+@keyframes floaty { 50% { margin-top: -14px; } }
+.about-intro-card { padding: 38px 40px; }
+.about-kicker { margin: 0; color: var(--cyan); font-size: 14px; letter-spacing: 6px; }
+/* extruded 3D title */
+.about-name {
+    margin: 8px 0 8px;
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 500;
+    text-shadow: 0 1px 0 #8f7bff, 0 2px 0 #7a66f0, 0 3px 0 #6a55d8, 0 4px 0 #5a45c8, 0 5px 0 #4a38b0,
+        0 6px 10px rgba(0, 0, 0, 0.6), 0 0 34px rgba(143, 123, 255, 0.65);
+}
+.about-role { margin: 0 0 22px; font-size: clamp(12px, 1.5vw, 16px); letter-spacing: 4px; color: rgba(255, 255, 255, 0.78); }
+.about-bio { font-family: system-ui, "Segoe UI", sans-serif; font-size: 17px; line-height: 1.7; color: rgba(255, 255, 255, 0.88); margin: 0 0 14px; max-width: 640px; }
+
+/* section headings */
+.about-h {
+    margin: 0 0 30px;
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 500;
+    letter-spacing: 6px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    text-shadow: 0 2px 0 #6a55d8, 0 3px 0 #4a38b0, 0 0 22px rgba(143, 123, 255, 0.6);
+}
+.about-h::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--accent), rgba(143, 123, 255, 0)); }
+
+/* skills */
+.skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+.skill-panel { padding: 24px; }
+.skill-group { display: block; margin-bottom: 14px; font-size: 12px; letter-spacing: 4px; color: var(--cyan); }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-tag {
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 6px 12px;
+    border: 1px solid rgba(154, 208, 255, 0.45);
+    background: rgba(154, 208, 255, 0.08);
+    transition: 0.25s;
+}
+.skill-tag:hover { border-color: var(--accent); box-shadow: 0 0 12px rgba(196, 107, 255, 0.5); }
+
+/* timeline: a curved holographic wall of cards */
+.timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 34px; }
+.timeline li { perspective: 1000px; }
+.timeline li:nth-child(even) { margin-left: auto; }
+.timeline-item { padding: 26px 30px; max-width: 640px; }
+.timeline-when { display: block; font-size: 11px; letter-spacing: 4px; color: var(--cyan); }
+.timeline-item h3 { margin: 6px 0 6px; font-size: 20px; font-weight: 500; letter-spacing: 2px; }
+.timeline-item p { margin: 0; font-family: system-ui, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.6; color: rgba(255, 255, 255, 0.84); }
+
+/* contact CTA */
+.about-cta { display: flex; justify-content: center; }
+.cta-card { padding: 44px 56px; text-align: center; max-width: 720px; }
+.cta-card .about-h { justify-content: center; }
+.cta-card .about-h::after { display: none; }
+.cta-card .about-bio { margin-left: auto; margin-right: auto; }
+.cta-row { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+.about-btn {
+    background: transparent;
+    color: white;
+    font-family: "Orbitron";
+    font-size: 18px;
+    letter-spacing: 4px;
+    padding: 18px 44px;
+    border: 2px solid transparent;
+    border-image: linear-gradient(purple, pink);
+    border-image-slice: 1;
+    cursor: pointer;
+    animation: aboutGlow 3s ease-in-out infinite;
+}
+.about-btn:hover { background: rgba(196, 107, 255, 0.2); }
+.about-btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+@keyframes aboutGlow {
+    0%, 100% { box-shadow: 0 0 8px rgba(200, 80, 220, 0.3); }
+    50%      { box-shadow: 0 0 20px rgba(200, 80, 220, 0.6); }
+}
+
+@media (max-width: 800px) {
+    .about-intro { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 28px; }
+    .about-photo-wrap { width: 220px; height: 220px; }
+    .about-photo { width: 190px; height: 190px; font-size: 48px; }
+    .about-bio { margin-left: auto; margin-right: auto; }
+    .about-content { gap: 80px; }
+    .about-intro-card { padding: 28px 22px; }
+    .cta-card { padding: 34px 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .about-photo, .about-btn, .emerge { animation: none; }
+    .emerge { opacity: 0; }
+    .tilt { transition: none; }
+}
+
+/* leaving for the purple planet */
+.about-page.leaving .about-content {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.97);
+    transition: opacity 0.6s ease, transform 0.9s ease;
+    pointer-events: none;
+}
+.leave-fade {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(circle at 50% 50%, #8a7cf0 0%, #5a4fd0 50%, #2a2480 100%);
+}

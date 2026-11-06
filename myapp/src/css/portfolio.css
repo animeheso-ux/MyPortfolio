@@ -1,0 +1,33 @@
+/* ---------- Portfolio page: hovering above the purple planet ---------- */
+.portfolio-page {
+    position: relative;
+    box-sizing: border-box;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: white;
+    font-family: "Orbitron";
+}
+
+/* the 3D planet sits fixed behind the mission panels */
+.portfolio-bg { position: fixed; inset: 0; z-index: 0; }
+.portfolio-bg canvas { display: block; }
+
+.portfolio-content { position: relative; z-index: 1; }
+
+/* arrival fade: the colour of the planet's surface, fading away as the camera rises */
+.arrive {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, #8a7cf0 0%, #5a4fd0 50%, #2a2480 100%);
+    animation: arrive 1s ease-out forwards;
+}
+@keyframes arrive {
+    0%   { opacity: 1; }
+    25%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .arrive { animation: none; opacity: 0; }
+}

@@ -1,0 +1,32 @@
+.NavBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.NavBar .container-fluid {
+    display: flex;
+    align-items: center;
+}
+
+.NavBar img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(143, 123, 255, 0.7));
+}
+
+.navbar-brand {
+    color: white !important;
+    font-family: "Orbitron";
+    transition: color 0.25s, text-shadow 0.25s;
+}
+
+.navbar-brand:hover {
+    color: #d9c7ff !important;
+    text-shadow: 0 0 12px rgba(143, 123, 255, 0.9);
+}

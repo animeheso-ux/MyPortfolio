@@ -1,0 +1,112 @@
+/* ---------- base ---------- */
+html, body {
+    margin: 0;
+    background: #0b0816;          /* dark base, so no white behind the canvas */
+}
+
+/* ---------- Three.js background ---------- */
+.three-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: #0b0816;
+}
+.three-bg canvas { display: block; }
+
+/* ---------- hero layout ---------- */
+.filter {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding-top: 130px;           /* clears the navbar */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(
+        to bottom,
+        rgba(12, 8, 24, 0.55) 0%,
+        rgba(28, 12, 50, 0.15) 40%,
+        rgba(70, 10, 90, 0.55) 100%
+    );
+}
+
+h1 {
+    margin: 0;
+    color: white;
+    font-family: "Orbitron";
+    text-shadow: 0 0 30px rgba(143, 123, 255, 0.55);
+}
+
+.Greeting, .name-font, .subtitle, .CTA {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.Greeting  { font-size: 100px; animation-delay: 0.1s; }
+.name-font { font-size: 130px; animation-delay: 0.3s; }
+.subtitle  { font-size: 32px; letter-spacing: 8px; font-weight: 400; animation-delay: 0.5s; }
+
+.CTA {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+    animation-delay: 0.7s;
+}
+
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- button + arrow ---------- */
+.cta-work {
+    background: transparent;
+    color: white;
+    font-family: "Orbitron";
+    font-size: 24px;
+    letter-spacing: 4px;
+    cursor: pointer;
+    padding: 24px 48px;
+    border: 2px solid transparent;
+    border-image: linear-gradient(purple, pink);
+    border-image-slice: 1;
+    animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 8px rgba(200, 80, 220, 0.3); }
+    50%      { box-shadow: 0 0 20px rgba(200, 80, 220, 0.6); }
+}
+
+.scroll-arrow {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(8px); }
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 900px) {
+    .Greeting  { font-size: 56px; }
+    .name-font { font-size: 56px; }
+    .subtitle  { font-size: 18px; letter-spacing: 5px; }
+    .cta-work  { font-size: 18px; padding: 18px 36px; }
+}

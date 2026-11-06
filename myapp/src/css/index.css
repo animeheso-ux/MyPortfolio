@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Orbitron";
+    src: url("../fonts/Orbitron/Orbitron-VariableFont_wght.ttf");
+}
+
+
+a {
+    font-family: "Orbitron";
+}
