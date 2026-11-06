@@ -14,7 +14,7 @@ const BIO = [
 const SKILLS = [
     { group: "Front end", items: ["React", "Three.js", "Bootstrap 5", "EJS"] },
     { group: "Back end", items: ["Node.js", "Express", "MySQL", "JWT"] },
-    { group: "Real-time", items: ["WebSockets", "PeerJS", "mediasoup"] },
+    { group: "Real-time", items: ["WebSockets", "PeerJS", "mediasoup/webRTC"] },
     { group: "DevOps", items: ["Docker", "Google Cloud"] },
     { group: "Mobile", items: ["Expo", "react-native-maps"] },
 ]
