@@ -1,10 +1,13 @@
 import "./css/contact.css"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useState } from "react"
 
 function Contact() {
     const navigate = useNavigate()
+    const location = useLocation()
     const [form, setForm] = useState({ name: "", email: "", comments: "" })
+    // true when you came through the door on the Portfolio page
+    const [arriving, setArriving] = useState(!!(location.state && location.state.fromDoor))
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -18,7 +21,9 @@ function Contact() {
 
     return (
         <div className="contact-page">
-      
+            {/* the doorway light fades away as you step through */}
+            {arriving && <div className="door-arrive" onAnimationEnd={() => setArriving(false)} aria-hidden="true" />}
+
             <div className="moon-decor moon-mid"></div>
 
             <div className="contact-content">
@@ -29,7 +34,7 @@ function Contact() {
 
                     <div className="contact-links">
                         <p className="links-title">Ways to reach me!</p>
-                        <a href="https://mail.google.com/mail/u/0/#inbox" className="link-btn">animeheso@gmail.com</a>
+                        <a href="mailto:animeheso@gmail.comx" className="link-btn">animeheso@gmail.com</a>
                         <a href="https://www.linkedin.com/in/lim-yong-jian-566985396/" target="_blank" rel="noreferrer" className="link-btn">LinkedIn</a>
                         <a href="https://github.com/animeheso-ux" target="_blank" rel="noreferrer" className="link-btn">Github</a>
                     </div>

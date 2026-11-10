@@ -51,8 +51,8 @@ const MISSIONS = [
         category: "Real-time",
         tag: "LIVE VIDEO",
         brief: "A video meeting app with live connections between users.",
-        stack: ["React", "WebSockets", "PeerJS"],
-        link: "",
+        stack: ["React", "WebSockets", "webRTC"],
+        link: "https://github.com/animeheso-ux/ZoomClone-WebRTC",
     },
     {
         id: "mediasoup",
@@ -62,6 +62,16 @@ const MISSIONS = [
         tag: "SFU",
         brief: "A video call app built on the mediasoup media server.",
         stack: ["React", "Node.js", "Express", "mediasoup"],
+        link: "https://github.com/animeheso-ux/SFU-with-mediasoup",
+    },
+        {
+        id: "Musicify(Mobile)",
+        code: "MSN-07",
+        title: "Musicify(Mobile)",
+        category: "Mobile App",
+        tag: "MUSIC",
+        brief: "I made this app based on my web version of musicfiy",
+        stack: ["React Native", "Node.js", "Express"],
         link: "",
     },
 ]
