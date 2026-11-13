@@ -10,9 +10,9 @@ const MISSIONS = [
         title: "Muscify",
         category: "Full-stack",
         tag: "FEATURED",
-        brief: "A music app and my main portfolio project.",
+        brief: "A music app and my main portfolio project.(YT-DLP-EXEC rate limited my website so therefore its kinda broken)",
         stack: [],
-        link: "",
+        link: "https://musicify-tan.vercel.app",
     },
     {
         id: "learning-quest",
